@@ -3,26 +3,24 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["\\.pkr\\.hcl$"],
-      "depNameTemplate": "{{#if depName}}{{{depName}}}{{else}}base{{/if}}",
-      "datasourceTemplate": "custom.ubuntu",      
+      "fileMatch": [
+        "\\.pkrvars\\.hcl$"
+      ],
+      "matchStrings": [
+        "ubuntu_build_datever = \"(?<currentValue>.*?)\"\n"
+      ],
+      "depNameTemplate": "ubuntu",
+      "datasourceTemplate": "custom.ubuntu-json",
       "versioningTemplate": "docker"
-    }
+    },
   ],
 	"customDatasources": {
-    "ubuntu-html": {
-      "defaultRegistryUrlTemplate": "https://cloud-images.ubuntu.com/releases/22.04/",
-      "format": "html"
-    },
     "ubuntu-json": {
       "defaultRegistryUrlTemplate": "https://cloud-images.ubuntu.com/releases/streams/v1/com.ubuntu.cloud:released:download.json",
-      "format": "json"
+      "format": "json",
+      "transformTemplates": [
+        "{\"releases\": $map($keys(products.\"com.ubuntu.cloud:server:22.04:amd64\".versions), function($v) { { \"version\": $v } }) }"
+      ]
     }
   },
-  "packageRules": [
-    {
-      "description": ["https://github.com/renovatebot/renovate/discussions/29815"],
-      "matchDatasource": "
-    }
-  ]
 }
