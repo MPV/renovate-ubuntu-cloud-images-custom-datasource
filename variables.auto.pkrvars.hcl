@@ -1,2 +1,2 @@
-ubuntu_build_datever = "20241217"
+ubuntu_build_datever = "20250228"
 
