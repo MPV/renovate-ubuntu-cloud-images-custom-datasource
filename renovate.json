@@ -6,8 +6,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.pkrvars\\.hcl$"
+      "managerFilePatterns": [
+        "/\\.pkrvars\\.hcl$/"
       ],
       "matchStrings": [
         "ubuntu_build_datever = \"(?<currentValue>.*?)\"\n"
